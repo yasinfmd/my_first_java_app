@@ -2,7 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dto.StudentDTO;
 import com.example.demo.entity.Student;
-import com.example.demo.error.CustomError;
+import com.example.demo.error.CustomException;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.service.StudentService;
 import org.modelmapper.ModelMapper;
@@ -34,31 +34,31 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-    public StudentDTO create(@Valid StudentDTO studentDTO) throws CustomError {
+    public StudentDTO create(@Valid StudentDTO studentDTO) throws CustomException {
         try {
             Student student = modelMapper.map(studentDTO, Student.class);
             student.setCreatedAt(new Date());
             student.setCreatedBy(student.getName());
             return modelMapper.map(studentRepository.save(student), StudentDTO.class);
         } catch (Exception e) {
-            throw new CustomError("Bir Hata ", e, e.getMessage());
+            throw new CustomException(e.getLocalizedMessage(), "Beklenmedik Bir Hata Oluştu", 500, new Date().getTime());
         }
     }
 
     @Override
-    public List<StudentDTO> getAll() throws CustomError {
+    public List<StudentDTO> getAll() throws CustomException {
         try {
             List<Student> studentList = studentRepository.findAll();
             List<StudentDTO> studentDTOList = studentList.stream().map(student -> modelMapper.map(student, StudentDTO.class)).collect(Collectors.toList());
             return studentDTOList;
         } catch (Exception e) {
-            throw new CustomError("Bir Hata ", e, e.getMessage());
+            throw new CustomException(e.getLocalizedMessage(), "Beklenmedik Bir Hata Oluştu", 500, new Date().getTime());
 
         }
     }
 
     @Override
-    public StudentDTO get(Long studentId) throws CustomError {
+    public StudentDTO get(Long studentId) throws CustomException {
         try {
             boolean isExist = this.isExist(studentId);
             if (isExist) {
@@ -67,23 +67,25 @@ public class StudentServiceImp implements StudentService {
             }
             return null;
         } catch (Exception e) {
-            throw new CustomError("Bir Hata ", e, e.getMessage());
+            throw new CustomException(e.getLocalizedMessage(), "Beklenmedik Bir Hata Oluştu", 500, new Date().getTime());
+
         }
     }
 
 
     @Override
-    public boolean isExist(Long studentId) throws CustomError {
+    public boolean isExist(Long studentId) throws CustomException {
         try {
             boolean isExist = studentRepository.existsById(studentId);
             return isExist;
         } catch (Exception e) {
-            throw new CustomError("Bir Hata ", e, e.getMessage());
+            throw new CustomException(e.getLocalizedMessage(), "Beklenmedik Bir Hata Oluştu", 500, new Date().getTime());
+
         }
     }
 
     @Override
-    public StudentDTO update(Long studentId, StudentDTO student) throws CustomError {
+    public StudentDTO update(Long studentId, StudentDTO student) throws CustomException {
         try {
             Optional<Student> _student = studentRepository.findById(studentId);
             if (_student.isPresent()) {
@@ -96,12 +98,13 @@ public class StudentServiceImp implements StudentService {
             return null;
 
         } catch (Exception e) {
-            throw new CustomError("Bir Hata ", e, e.getMessage());
+            throw new CustomException(e.getLocalizedMessage(), "Beklenmedik Bir Hata Oluştu", 500, new Date().getTime());
+
         }
     }
 
     @Override
-    public Page<StudentDTO> pagination(int currentPage, int pageSize) throws CustomError {
+    public Page<StudentDTO> pagination(int currentPage, int pageSize) throws CustomException {
         try {
             Pageable pageable = PageRequest.of(currentPage, pageSize, Sort.by("name").descending());
             Page<StudentDTO> students = studentRepository.findAll(pageable).map((student -> modelMapper.map(student, StudentDTO.class)));
@@ -109,36 +112,35 @@ public class StudentServiceImp implements StudentService {
 
             return students;
         } catch (Exception e) {
-            throw new CustomError("Bir Hata ", e, e.getMessage());
+            throw new CustomException(e.getLocalizedMessage(), "Beklenmedik Bir Hata Oluştu", 500, new Date().getTime());
 
         }
     }
 
     @Override
-    public Page<StudentDTO> paginate(Pageable pageable) throws CustomError {
+    public Page<StudentDTO> paginate(Pageable pageable) throws CustomException {
         try {
             Page<StudentDTO> students = studentRepository.findAll(pageable).map((student -> modelMapper.map(student, StudentDTO.class)));
             return students;
 
         } catch (Exception e) {
-            throw new CustomError("Bir Hata ", e, e.getMessage());
+            throw new CustomException(e.getLocalizedMessage(), "Beklenmedik Bir Hata Oluştu", 500, new Date().getTime());
 
         }
     }
 
     @Override
-    public boolean delete(Long studentId) throws CustomError {
+    public boolean delete(Long studentId) throws CustomException {
         try {
             boolean isExist = isExist(studentId);
             if (isExist) {
                 studentRepository.deleteById(studentId);
                 return true;
             }
-            //
-            //log_10.10.2020 3 numaralı kayıt student db de bulunamadı
             return true;
         } catch (Exception e) {
-            throw new CustomError("Bir Hata ", e, e.getMessage());
+            throw new CustomException(e.getLocalizedMessage(), "Beklenmedik Bir Hata Oluştu", 500, new Date().getTime());
+
         }
     }
 
