@@ -1,0 +1,22 @@
+server:
+  port : 9090
+
+spring:
+  logging:
+    level:
+      org.springframework: DEBUG
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation : true
+    database : POSTGRESQL
+    show-sql : true
+    generate-ddl : true
+  datasource:
+    platform : postgres
+    url : jdbc:postgresql://localhost:5432/java_app
+    username : postgres
+    password : admin123
+

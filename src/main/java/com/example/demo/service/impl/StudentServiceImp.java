@@ -41,7 +41,7 @@ public class StudentServiceImp implements StudentService {
             student.setCreatedBy(student.getName());
             return modelMapper.map(studentRepository.save(student), StudentDTO.class);
         } catch (Exception e) {
-            throw new CustomException(e.getLocalizedMessage(), "Beklenmedik Bir Hata Oluştu", 500, new Date().getTime());
+            throw new CustomException(e.getLocalizedMessage(),  500, new Date().getTime());
         }
     }
 
@@ -52,11 +52,13 @@ public class StudentServiceImp implements StudentService {
             List<StudentDTO> studentDTOList = studentList.stream().map(student -> modelMapper.map(student, StudentDTO.class)).collect(Collectors.toList());
             return studentDTOList;
         } catch (Exception e) {
-            throw new CustomException(e.getLocalizedMessage(), "Beklenmedik Bir Hata Oluştu", 500, new Date().getTime());
+            throw new CustomException(e.getLocalizedMessage(),500, new Date().getTime());
 
         }
     }
 
+    //custom validation anotation bakılacak
+        //java create resourcer folder and publish image file resource folder
     @Override
     public StudentDTO get(Long studentId) throws CustomException {
         try {
@@ -67,7 +69,8 @@ public class StudentServiceImp implements StudentService {
             }
             return null;
         } catch (Exception e) {
-            throw new CustomException(e.getLocalizedMessage(), "Beklenmedik Bir Hata Oluştu", 500, new Date().getTime());
+            throw new CustomException(e.getLocalizedMessage(),  500, new Date().getTime());
+
 
         }
     }
@@ -79,7 +82,8 @@ public class StudentServiceImp implements StudentService {
             boolean isExist = studentRepository.existsById(studentId);
             return isExist;
         } catch (Exception e) {
-            throw new CustomException(e.getLocalizedMessage(), "Beklenmedik Bir Hata Oluştu", 500, new Date().getTime());
+            throw new CustomException(e.getLocalizedMessage(),  500, new Date().getTime());
+
 
         }
     }
@@ -98,7 +102,8 @@ public class StudentServiceImp implements StudentService {
             return null;
 
         } catch (Exception e) {
-            throw new CustomException(e.getLocalizedMessage(), "Beklenmedik Bir Hata Oluştu", 500, new Date().getTime());
+            throw new CustomException(e.getLocalizedMessage(),  500, new Date().getTime());
+
 
         }
     }
@@ -112,7 +117,8 @@ public class StudentServiceImp implements StudentService {
 
             return students;
         } catch (Exception e) {
-            throw new CustomException(e.getLocalizedMessage(), "Beklenmedik Bir Hata Oluştu", 500, new Date().getTime());
+            throw new CustomException(e.getLocalizedMessage(),  500, new Date().getTime());
+
 
         }
     }
@@ -124,7 +130,8 @@ public class StudentServiceImp implements StudentService {
             return students;
 
         } catch (Exception e) {
-            throw new CustomException(e.getLocalizedMessage(), "Beklenmedik Bir Hata Oluştu", 500, new Date().getTime());
+            throw new CustomException(e.getLocalizedMessage(),  500, new Date().getTime());
+
 
         }
     }
@@ -139,7 +146,8 @@ public class StudentServiceImp implements StudentService {
             }
             return true;
         } catch (Exception e) {
-            throw new CustomException(e.getLocalizedMessage(), "Beklenmedik Bir Hata Oluştu", 500, new Date().getTime());
+            throw new CustomException(e.getLocalizedMessage(),  500, new Date().getTime());
+
 
         }
     }

@@ -11,14 +11,9 @@ public class CustomException extends Exception {
 
 
 
-    public CustomException(String errorMessage, int code, long timestamp) {
-        this.errorMessage = errorMessage;
-        this.code = code;
-        this.timestamp = timestamp;
-    }
 
-    public CustomException(String message, String errorMessage, int code, long timestamp) {
-        super(message);
+
+    public CustomException(String errorMessage, int code, long timestamp) {
         this.errorMessage = errorMessage;
         this.code = code;
         this.timestamp = timestamp;
