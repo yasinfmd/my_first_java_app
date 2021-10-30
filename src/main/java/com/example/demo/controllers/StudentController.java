@@ -3,7 +3,6 @@ package com.example.demo.controllers;
 import com.example.demo.config.BaseResponseConfig;
 import com.example.demo.dto.StudentDTO;
 import com.example.demo.entity.BaseResponse;
-import com.example.demo.entity.Student;
 import com.example.demo.error.CustomException;
 import com.example.demo.service.StudentService;
 import org.slf4j.Logger;

@@ -1,7 +1,22 @@
 server:
   port : 9090
 
+custom-url-location: /api/files/**
+custom-storage: uploadFiles
+file:
+  storage:
+    location: uploadFiles
 spring:
+  resources:
+    cache:
+      cachecontrol:
+        max-age: 36000
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 20MB
+      file-size-threshold: 5MB
   logging:
     level:
       org.springframework: DEBUG
