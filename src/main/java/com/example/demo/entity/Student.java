@@ -20,6 +20,10 @@ public class Student extends BaseEntity {
     @Size(min = 2,max = 20 , message = "Mesaj 2 ile 20 arasında olmalı")
     private  String surname;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "section_id", referencedColumnName = "id")
+    private Section section;
+
     public String getName() {
         return name;
     }
@@ -34,5 +38,13 @@ public class Student extends BaseEntity {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
     }
 }

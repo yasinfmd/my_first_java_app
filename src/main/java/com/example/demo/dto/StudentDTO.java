@@ -11,6 +11,8 @@ public class StudentDTO {
 
     private String fullName;
 
+    private Long sectionId;
+
     public Long getStudentId() {
         return studentId;
     }
@@ -42,4 +44,11 @@ public class StudentDTO {
     }
 
 
+    public Long getSectionId() {
+        return sectionId;
+    }
+
+    public void setSectionId(Long sectionId) {
+        this.sectionId = sectionId;
+    }
 }

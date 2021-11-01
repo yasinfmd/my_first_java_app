@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.StudentDTO;
+import com.example.demo.entity.Section;
 import com.example.demo.entity.Student;
 import com.example.demo.error.CustomException;
 import com.example.demo.repository.StudentRepository;
