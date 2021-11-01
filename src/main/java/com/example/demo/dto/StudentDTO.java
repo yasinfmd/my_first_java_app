@@ -1,6 +1,5 @@
 package com.example.demo.dto;
 
-import javax.validation.constraints.NotNull;
 
 public class StudentDTO {
 

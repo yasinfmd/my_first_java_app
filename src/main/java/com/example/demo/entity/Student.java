@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.example.demo.anotation.CustomName;
 import com.example.demo.baseentities.BaseEntity;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import javax.validation.constraints.Size;
 public class Student extends BaseEntity {
 
     @NotNull
+    @CustomName(message = "Custom Anotation")
     @Size(min = 2,max = 20 , message = "Mesaj 2 ile 20 arasında olmalı")
     private String name;
 
